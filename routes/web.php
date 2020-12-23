@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +12,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/article','ArticleController@showList');
+
+//記事一覧
+Route::get('/test','TestController@showList')->name('test');
+// form request 
+Route::post('/add', 'TestController@add')->name('add');
+//詳細:{{$test ->id}}をcontrollerに渡す
+Route::get('test/{id}','TestController@showDetail',)->name('detail');
+// comment保存
+Route::post('test/{id)', 'DetailController@commentAdd')->name('commentAdd');
+// comment削除
+Route::post('test/delete/{id}', 'DetailController@Delete')->name('delete');
